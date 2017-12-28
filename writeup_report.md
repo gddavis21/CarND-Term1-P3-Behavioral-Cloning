@@ -50,20 +50,9 @@ The model.py file contains the code for training and saving the convolutional ne
 
 #### 1. An appropriate model architecture has been employed
 
-The model consists of a convolutional neural network, configured as follows:
+The model consists of a convolution neural network with 5x5 and 3x3 filter sizes, and depths between 24 and 64 (model.py lines 146-173). 
 
-Image data is pre-processed in the model (see function create_initial_model):
-* model assumes input RGB image data of size 320x160
-* top 60 and bottom 20 pixels are cropped via Keras Cropping2D layer
-* image data converted to floating-point and normalized via Keras Lambda layer  
-
-Neural network layers added to the model (see function add_my_CNN_steering_layer):
-* 2 convolutional layers using 5x5 filters and RELU activation, followed by max-pooling layer
-* 2 more convolutional layers using 3x3 filters and RELU activation, followed by another max-pooling layer
-* 2 fully connected layers using RELU activation
-* final readout layer for steering angle computation
-
-The model includes RELU layers and Max-Pooling layers to introduce nonlinearity. All weights are initialized using He initialization, which has been shown to be effective in combination with RELU activation.
+The model includes RELU activation and Max-Pooling layers to introduce nonlinearity, and the input image data is cropped and normalized in the model using Keras cropping & lambda layers (model.py line 132-137). 
 
 #### 2. Attempts to reduce overfitting in the model
 
@@ -101,7 +90,26 @@ At the end of the process, the vehicle is able to drive autonomously around the 
 
 #### 2. Final Model Architecture
 
-The final model architecture (model.py lines 18-24) consisted of a convolution neural network with the following layers and layer sizes ...
+The final model architecture (model.py lines 121-173) consists of a convolutional neural network with the following layers and layer sizes:
+
+* Image data is pre-processed in the model (function create_initial_model):
+    * model assumes input RGB image data of size 320x160
+    * top 60 and bottom 20 pixels are cropped via Keras Cropping2D layer
+    * image data converted to floating-point and normalized via Keras Lambda layer  
+
+* Neural network layers added to the model (function add_my_CNN_steering_layer):
+    1. Convolutional layer: 5x5 filter, depth 24, RELU activation
+    2. Convolutional layer: 5x5 filter, depth 48, RELU activation 
+    3. Max-Pooling layer
+    4. Convolutional layer: 3x3 filter, depth 64, RELU activation
+    5. Convolutional layer: 3x3 filter, depth 64, RELU activation 
+    6. Max-Pooling layer
+    7. Dense layer, width 128, RELU activation
+    8. Dense layer, width 64, RELU activation
+    9. Steering angle readout layer (1 output)
+
+* The model includes RELU layers and Max-Pooling layers to introduce nonlinearity. 
+* All weights are initialized using He initialization, which has been shown to be effective in combination with RELU activation.
 
 Here is a visualization of the architecture (note: visualizing the architecture is optional according to the project rubric)
 
