@@ -22,9 +22,9 @@ The goals / steps of this project are the following:
 [image_recover_from_right_2]: ./examples/recover_from_right_2.png ""
 [image_recover_from_right_3]: ./examples/recover_from_right_3.png ""
 [image2]: ./examples/placeholder.png "Grayscaling"
-[image_left_camera]: ./examples/track1_left_camera.jpg "Left-camera Image"
-[image_center_camera]: ./examples/track1_center_camera.jpg "Center-camera Image"
-[image_right_camera]: ./examples/track1_right_camera.jpg "Right-camera Image"
+[image_left_camera]: ./examples/track1_left_camera.png "Left-camera Image"
+[image_center_camera]: ./examples/track1_center_camera.png "Center-camera Image"
+[image_right_camera]: ./examples/track1_right_camera.png "Right-camera Image"
 [image_track1_normal]: ./examples/track1_normal.jpg "Normal Image"
 [image_track1_flipped]: ./examples/track1_flipped.jpg "Flipped Image"
 
