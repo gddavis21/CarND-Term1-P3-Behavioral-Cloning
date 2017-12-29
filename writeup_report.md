@@ -47,7 +47,10 @@ My project includes the following files:
 * model.py containing the script to create and train the model
 * drive.py for driving the car in autonomous mode
 * model.h5 containing a trained convolution neural network 
-* writeup_report.md or writeup_report.pdf summarizing the results
+* video.mp4 video of autonomous driving on Track #1 at default 9 mph
+* Track1-30mph.mp4 video of autonomous driving on Track #1 at 30 mph
+* Track2-18mph.mp4 video of autonomous driving on Track #2 at 18 mph
+* writeup_report.md which describes the project solution and summarizes results
 
 #### 2. Submission includes functional code
 Using the Udacity provided simulator and my drive.py file, the car can be driven autonomously around the track by executing 
@@ -117,6 +120,8 @@ For the sake of being thorough, I did experiment with adding Dropout to this mod
 While testing the steering performance on Track #1, I did notice that at times the car got close to the left or right lane lines, and "stuck" there instead of moving back to the center. I decided to collect another batches of training data with several instances of starting the car on either side of the road, and steered back to the center. I noticed an immediate performance improvement--when the car veered to the edge of the lane, it would then steer smoothly back to the center.
 
 At the end of the process, the vehicle is able to drive autonomously around both Track #1 and Track #2 at the default speed of 9 MPH without leaving the road. I also experimented with increasing the speed (by editing the drive.py script). The vehicle can successfully navigate Track #1 at speeds up to 30 MPH, and Track #2 at speeds up to 18 MPH. At 20 MPH on Track #2 it steers off the road on a sharp down-hill turn just short of the end of the lap. Room for improvement!
+
+Note that in addition to the required project submission of the Track #1 video driving at 9 MPH (video.mp4), I also recorded videos of driving Track #1 at 30 MPH and Track #2 at 18 MPH (track1-30mph.mp4 & track2-18mph.mp4).
 
 #### 2. Final Model Architecture
 
