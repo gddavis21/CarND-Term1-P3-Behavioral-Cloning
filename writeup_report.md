@@ -16,24 +16,24 @@ The goals / steps of this project are the following:
 
 [image_steering_angle_histogram]: ./examples/steering_angle_hist.png
 [image_training_progress]: ./examples/training_progress.png
-[image_track1_center_lane_1]: ./examples/track1_center_lane_1.png ""
-[image_track1_center_lane_2]: ./examples/track1_center_lane_2.png ""
-[image_track1_center_lane_3]: ./examples/track1_center_lane_3.png ""
-[image_track2_center_lane_1]: ./examples/track2_center_lane_1.png ""
-[image_track2_center_lane_2]: ./examples/track2_center_lane_2.png ""
-[image_track2_center_lane_3]: ./examples/track2_center_lane_3.png ""
-[image_recover_from_left_1]: ./examples/recover_from_left_1.png ""
-[image_recover_from_left_2]: ./examples/recover_from_left_2.png ""
-[image_recover_from_left_3]: ./examples/recover_from_left_3.png ""
-[image_recover_from_right_1]: ./examples/recover_from_right_1.png ""
-[image_recover_from_right_2]: ./examples/recover_from_right_2.png ""
-[image_recover_from_right_3]: ./examples/recover_from_right_3.png ""
-[image2]: ./examples/placeholder.png "Grayscaling"
-[image_left_camera]: ./examples/track1_left_camera.png "Left-camera Image"
-[image_center_camera]: ./examples/track1_center_camera.png "Center-camera Image"
-[image_right_camera]: ./examples/track1_right_camera.png "Right-camera Image"
-[image_track1_normal]: ./examples/track1_normal.jpg "Normal Image"
-[image_track1_flipped]: ./examples/track1_flipped.jpg "Flipped Image"
+[image_model_architecture]: ./examples/model.png
+[image_track1_center_lane_1]: ./examples/track1_center_lane_1.png
+[image_track1_center_lane_2]: ./examples/track1_center_lane_2.png
+[image_track1_center_lane_3]: ./examples/track1_center_lane_3.png
+[image_track2_center_lane_1]: ./examples/track2_center_lane_1.png
+[image_track2_center_lane_2]: ./examples/track2_center_lane_2.png
+[image_track2_center_lane_3]: ./examples/track2_center_lane_3.png
+[image_recover_from_left_1]: ./examples/recover_from_left_1.png
+[image_recover_from_left_2]: ./examples/recover_from_left_2.png
+[image_recover_from_left_3]: ./examples/recover_from_left_3.png
+[image_recover_from_right_1]: ./examples/recover_from_right_1.png
+[image_recover_from_right_2]: ./examples/recover_from_right_2.png
+[image_recover_from_right_3]: ./examples/recover_from_right_3.png
+[image_left_camera]: ./examples/track1_left_camera.png
+[image_center_camera]: ./examples/track1_center_camera.png
+[image_right_camera]: ./examples/track1_right_camera.png
+[image_track1_normal]: ./examples/track1_normal.jpg
+[image_track1_flipped]: ./examples/track1_flipped.jpg
 
 ## Rubric Points
 ### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/432/view) individually and describe how I addressed each point in my implementation.  
@@ -59,7 +59,7 @@ python drive.py model.h5
 
 The model.py file contains the code for training and saving the convolutional neural network. The file shows the pipeline I used for training and validating the model, and it contains comments to explain how the code works.
 
-### Model Architecture and Training Strategy--Overview
+### Model Architecture & Training Strategy: Overview
 
 #### 1. An appropriate model architecture has been employed
 
@@ -94,7 +94,7 @@ Training data was chosen to keep the vehicle driving on the road. I used a combi
 
 For details about how I created the training data, see the next section. 
 
-### Model Architecture and Training Strategy--In-Depth
+### Model Architecture & Training Strategy: In-Depth
 
 #### 1. Solution Design Approach
 
@@ -143,7 +143,7 @@ The final model architecture (model.py lines 121-173) consists of a convolutiona
 
 Here is a visualization of the architecture (note: visualizing the architecture is optional according to the project rubric)
 
-![alt text][image1]
+![Model architecture][image_model_architecture]
 
 #### 3. Creation of the Training Set & Training Process
 
@@ -171,7 +171,9 @@ Similarly, these images show what a recovery looks like starting from the right 
 ![Correcting][image_recover_from_right_2]
 ![Back in center][image_recover_from_right_3]
 
-To augment the training data set, I implemented the following:
+##### Training Data Augmentation
+
+The augmentation of training data is applied dynamically during training, resulting in a continuously varied stream of training samples. I found in practice this was an effective means of preventing the model from overfitting to the training data.
 
 1. Each training sample includes images captured with center, left and right cameras. To increase variation in the training set, I randomly selected one of these images for each training sample:
     * Center-camera image for 50% of samples
@@ -192,11 +194,13 @@ To augment the training data set, I implemented the following:
 
 ![Trained steering angles][image_steering_angle_histogram]
 
-The augmentation of training data is applied dynamically during training, resulting in a continuously varied stream of training samples. I found in practice this was an effective means of preventing the model from overfitting to the training data.
+##### Model Training & Validation
 
-After the collection process, I had X number of data points. I then preprocessed this data by ...
+Overall I collected 10540 training data samples. The training data is randomly shuffled, and 20% is separated into a validation data set. 
 
+Images are pre-processed in the model as follows:
+1. Top 60 and bottom 20 pixels are cropped out
+2. Image is converted to floating-point
+3. Image is normalized to range [-1.0, 1.0]
 
-The training data is randomly shuffled, and 20% is separated into a validation data set. 
-
-I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was 30 as evidenced by ... I used an adam optimizer so that manually training the learning rate wasn't necessary.
+I used this training data for training the model. The validation set helped determine if the model was over or under fitting.
