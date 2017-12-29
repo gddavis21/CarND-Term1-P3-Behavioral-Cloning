@@ -116,7 +116,7 @@ For the sake of being thorough, I did experiment with adding Dropout to this mod
 
 While testing the steering performance on Track #1, I did notice that at times the car got close to the left or right lane lines, and "stuck" there instead of moving back to the center. I decided to collect another batches of training data with several instances of starting the car on either side of the road, and steered back to the center. I noticed an immediate performance improvement--when the car veered to the edge of the lane, it would then steer smoothly back to the center.
 
-At the end of the process, the vehicle is able to drive autonomously around both Track #1 and Track #2 at the default speed of 9 MPH without leaving the road. I also experimented with increasing the speed (by editing the drive.py script). The vehicle is able to successfully navigate Track #1 at speeds up to 30 MPH, and Track #2 at speeds up to 15 MPH. Sadly, at 20 MPH on Track #2 it steers off the road on a sharp down-hill turn just short of the end of the lap. Room for improvement!
+At the end of the process, the vehicle is able to drive autonomously around both Track #1 and Track #2 at the default speed of 9 MPH without leaving the road. I also experimented with increasing the speed (by editing the drive.py script). The vehicle can successfully navigate Track #1 at speeds up to 30 MPH, and Track #2 at speeds up to 18 MPH. At 20 MPH on Track #2 it steers off the road on a sharp down-hill turn just short of the end of the lap. Room for improvement!
 
 #### 2. Final Model Architecture
 
@@ -141,7 +141,7 @@ The final model architecture (model.py lines 121-173) consists of a convolutiona
 * The model includes RELU layers and Max-Pooling layers to introduce nonlinearity. 
 * All weights are initialized using [He initialization](https://arxiv.org/abs/1502.01852), which has been shown to be effective in combination with RELU activation.
 
-Here is a visualization of the architecture (note: visualizing the architecture is optional according to the project rubric)
+Here is a visualization of the architecture:
 
 ![Model architecture][image_model_architecture]
 

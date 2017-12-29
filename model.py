@@ -14,7 +14,7 @@ from keras.layers.convolutional import Convolution2D, Cropping2D
 from keras.layers.pooling import MaxPooling2D
 from keras.layers.normalization import BatchNormalization
 from keras import optimizers
-# from keras.utils import np_utils
+from keras.utils.visualize_util import plot
 
 flags = tf.app.flags
 FLAGS = flags.FLAGS
@@ -25,6 +25,7 @@ flags.DEFINE_integer('batch_size', 128, 'Training batch size')
 flags.DEFINE_float('learning_rate', 0.001, 'Learning rate')
 flags.DEFINE_float('steering_correction', 0.15, 'Left/right camera steering angle correction')
 flags.DEFINE_float('keep_zeros', 0.5, 'Zero-angle sample retention rate')
+flags.DEFINE_bool('model_diagram', False, 'Output model visualization diagram')
 
 def load_training_samples(log_path):
     '''
@@ -143,33 +144,40 @@ def add_my_CNN_steering_layer(model):
     Add CNN steering regression layer to Keras model.
     This is the model used in final project submission.
     '''
+    # in: 80x320, out: 24@38x158
     model.add(Convolution2D(
         24, 5, 5, subsample=(2,2), border_mode='valid', 
-        init='he_normal'))
-    model.add(Activation('relu'))
+        init='he_normal',
+        activation='relu'))
     
+    # in 24@38x158, out: 48@17x77
     model.add(Convolution2D(
         48, 5, 5, subsample=(2,2), border_mode='valid', 
-        init='he_normal'))
-    model.add(Activation('relu'))
-    model.add(MaxPooling2D(pool_size=(2,2)))
+        init='he_normal',
+        activation='relu'))
     
+    # in: 48@17x77, out: 48@8x38
+    model.add(MaxPooling2D(pool_size=(2,2)))
+
+    # in: 48@9x39, out: 64@6x36
     model.add(Convolution2D(
         64, 3, 3, subsample=(1,1), border_mode='valid', 
-        init='he_normal'))
-    model.add(Activation('relu'))
+        init='he_normal',
+        activation='relu'))
     
+    # in: 64@7x37, out: 64@4x34
     model.add(Convolution2D(
         64, 3, 3, subsample=(1,1), border_mode='valid', 
-        init='he_normal'))
-    model.add(Activation('relu'))
+        init='he_normal',
+        activation='relu'))
+    
+    # in: 64@5x35, out: 64@2x17
     model.add(MaxPooling2D(pool_size=(2,2)))
     
+    # in: 64@2x17, out: 2176
     model.add(Flatten())
-    model.add(Dense(128, init='he_normal'))
-    model.add(Activation('relu'))
-    model.add(Dense(64, init='he_normal'))
-    model.add(Activation('relu'))
+    model.add(Dense(128, init='he_normal', activation='relu'))
+    model.add(Dense(64, init='he_normal', activation='relu'))
     model.add(Dense(1, init='he_normal'))  # regression
 
 
@@ -300,6 +308,15 @@ def main(_):
     print('Training samples: %d' % len(train_samples))
     print('Validation samples: %d' % len(valid_samples))
 
+    # setup model
+    model = create_initial_model()
+    add_my_CNN_steering_layer(model)
+    model.compile(loss = 'mse', optimizer = 'adam', metrics=['mae'])
+
+    if FLAGS.model_diagram:
+        plot(model, to_file='model.png', show_shapes=True, show_layer_names=False)
+
+    # train & save model, plot training progress
     train_gen = training_data_generator(
         train_samples, 
         FLAGS.batch_size,
@@ -308,12 +325,6 @@ def main(_):
         
     valid_gen = validation_data_generator(valid_samples, FLAGS.batch_size)
     
-    # setup model
-    model = create_initial_model()
-    add_my_CNN_steering_layer(model)
-    model.compile(loss = 'mse', optimizer = 'adam', metrics=['mae'])
-
-    # train & save model, plot training progress
     fit_history = model.fit_generator(
         train_gen,
         samples_per_epoch=len(train_samples),
