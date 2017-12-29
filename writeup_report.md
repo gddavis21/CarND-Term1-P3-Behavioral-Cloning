@@ -15,6 +15,12 @@ The goals / steps of this project are the following:
 [//]: # (Image References)
 
 [image_training_progress]: ./examples/training_progress.png
+[image_track1_center_lane_1] ./examples/track1_center_lane_1.png ""
+[image_track1_center_lane_2] ./examples/track1_center_lane_2.png ""
+[image_track1_center_lane_3] ./examples/track1_center_lane_3.png ""
+[image_track2_center_lane_1] ./examples/track2_center_lane_1.png ""
+[image_track2_center_lane_2] ./examples/track2_center_lane_2.png ""
+[image_track2_center_lane_3] ./examples/track2_center_lane_3.png ""
 [image_recover_from_left_1]: ./examples/recover_from_left_1.png ""
 [image_recover_from_left_2]: ./examples/recover_from_left_2.png ""
 [image_recover_from_left_3]: ./examples/recover_from_left_3.png ""
@@ -83,7 +89,7 @@ Training data was chosen to keep the vehicle driving on the road. I used a combi
 2. 1 lap of center-lane driving on Track #1, driving in opposite direction
 3. 1 lap of center-lane driving on Track #2
 4. 1 lap of center-lane driving on Track #2, driving in opposite direction
-5. several instances of recovering from the left and right sides of the road (on Track #1)
+5. multiple recoveries from the left and right sides of the road (on Track #1)
 
 For details about how I created the training data, see the next section. 
 
@@ -142,9 +148,15 @@ Here is a visualization of the architecture (note: visualizing the architecture 
 
 To capture good driving behavior, I first recorded 2 laps of center-lane driving on Track #1 -- 1 lap in the default/forward direction, and another in the opposite direction (by turning the car around). Track #1 includes a lot more left turning than right turning in the forward direction, so recording a lap in the opposite direction balances the data set. Here are example images of center-lane driving on Track #1:
 
-![alt text][image2]
+![Track #1][image_track1_center_lane_1]
+![Track #1][image_track1_center_lane_2]
+![Track #1][image_track1_center_lane_3]
 
 To reduce overfitting the model to Track #1, I then recorded 2 more laps of center-lane driving, but on Track #2 instead. As before, I recorded 1 lap in the forward direction and 1 lap in the opposite direction.
+
+![Track #2][image_track2_center_lane_1]
+![Track #2][image_track2_center_lane_2]
+![Track #2][image_track2_center_lane_3]
 
 I then recorded the vehicle recovering from the left and right sides of the road back to center so that the vehicle would learn to steer back toward the center whenever it veers off to the left or right side of the lane. These images show what a recovery looks like starting from the left side of the road:
 
