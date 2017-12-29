@@ -15,12 +15,12 @@ The goals / steps of this project are the following:
 [//]: # (Image References)
 
 [image_training_progress]: ./examples/training_progress.png
-[image_track1_center_lane_1] ./examples/track1_center_lane_1.png ""
-[image_track1_center_lane_2] ./examples/track1_center_lane_2.png ""
-[image_track1_center_lane_3] ./examples/track1_center_lane_3.png ""
-[image_track2_center_lane_1] ./examples/track2_center_lane_1.png ""
-[image_track2_center_lane_2] ./examples/track2_center_lane_2.png ""
-[image_track2_center_lane_3] ./examples/track2_center_lane_3.png ""
+[image_track1_center_lane_1]: ./examples/track1_center_lane_1.png ""
+[image_track1_center_lane_2]: ./examples/track1_center_lane_2.png ""
+[image_track1_center_lane_3]: ./examples/track1_center_lane_3.png ""
+[image_track2_center_lane_1]: ./examples/track2_center_lane_1.png ""
+[image_track2_center_lane_2]: ./examples/track2_center_lane_2.png ""
+[image_track2_center_lane_3]: ./examples/track2_center_lane_3.png ""
 [image_recover_from_left_1]: ./examples/recover_from_left_1.png ""
 [image_recover_from_left_2]: ./examples/recover_from_left_2.png ""
 [image_recover_from_left_3]: ./examples/recover_from_left_3.png ""
