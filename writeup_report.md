@@ -15,12 +15,12 @@ The goals / steps of this project are the following:
 [//]: # (Image References)
 
 [image_training_progress]: ./examples/training_progress.png
-[image_recover_from_left_1]: ./examples/recover_from_left_1.jpg ""
-[image_recover_from_left_2]: ./examples/recover_from_left_2.jpg ""
-[image_recover_from_left_3]: ./examples/recover_from_left_3.jpg ""
-[image_recover_from_right_1]: ./examples/recover_from_right_1.jpg ""
-[image_recover_from_right_2]: ./examples/recover_from_right_2.jpg ""
-[image_recover_from_right_3]: ./examples/recover_from_right_3.jpg ""
+[image_recover_from_left_1]: ./examples/recover_from_left_1.png ""
+[image_recover_from_left_2]: ./examples/recover_from_left_2.png ""
+[image_recover_from_left_3]: ./examples/recover_from_left_3.png ""
+[image_recover_from_right_1]: ./examples/recover_from_right_1.png ""
+[image_recover_from_right_2]: ./examples/recover_from_right_2.png ""
+[image_recover_from_right_3]: ./examples/recover_from_right_3.png ""
 [image2]: ./examples/placeholder.png "Grayscaling"
 [image_left_camera]: ./examples/track1_left_camera.jpg "Left-camera Image"
 [image_center_camera]: ./examples/track1_center_camera.jpg "Center-camera Image"
@@ -166,9 +166,9 @@ To augment the training data set, I implemented the following:
     * Right-camera image for 25% of samples
     * When using left/right image, the steering angle was adjusted by a (hyper-parameter) offset. The steering angle data ranges from -1 to 1. With some experiementation I settled on a steering adjustment of 0.15.
 
-![Left-camera][image_right_camera.jpg]
-![Center-camera][image_center_camera.jpg]
-![Right-camera][image_right_camera.jpg]
+![Left-camera][image_left_camera]
+![Center-camera][image_center_camera]
+![Right-camera][image_right_camera]
 
 2. To completely remove left/right steering bias, I randomly flipped the training images (and corresponding steering angles) on 50% of training samples. For example, here is an image that has then been flipped:
 
