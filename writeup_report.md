@@ -14,6 +14,7 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
+[image_steering_angle_histogram]: ./examples/steering_angle_hist.png
 [image_training_progress]: ./examples/training_progress.png
 [image_track1_center_lane_1]: ./examples/track1_center_lane_1.png ""
 [image_track1_center_lane_2]: ./examples/track1_center_lane_2.png ""
@@ -187,7 +188,11 @@ To augment the training data set, I implemented the following:
 ![Original image][image_track1_normal]
 ![Flipped image][image_track1_flipped]
 
-The augmentation of training data is applied dynamically during training, making for an effectively infinite variation of training samples. I found in practice this was an effective means of preventing overfitting the model to the training data.
+3. While collecting training images, I generated a histogram of the trained steering angles. Not surprisingly, the number of zero-angle samples are clearly over-represented in the data. To balance the distribution of training data, I made the training data generator randomly ignore 50% of zero-angle samples.
+
+![Trained steering angles][image_steering_angle_histogram]
+
+The augmentation of training data is applied dynamically during training, resulting in a continuously varied stream of training samples. I found in practice this was an effective means of preventing the model from overfitting to the training data.
 
 After the collection process, I had X number of data points. I then preprocessed this data by ...
 
